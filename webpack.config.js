@@ -1,17 +1,18 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
 module.exports = {
   entry: "./src/client/js/main.js", // 우리가 변형하고자 하는 파일
   mode: "development",
   watch: true,
-  plugins: [new MiniCssExtractPlugin({
-    filename: "css/styles.css",
-  }),
-],
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "css/styles.css",
+    }),
+  ],
   output: {
     filename: "js/main.js",
-    path: path.resolve(__dirname, "assets"), // 변형 후 해당 경로에 해당이름으로 저장해라
+    path: path.resolve(__dirname, "assets"),  // 변형 후 해당 경로에 해당이름으로 저장해라
     clean: true,
   },
   module: {
