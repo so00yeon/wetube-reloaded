@@ -32,6 +32,8 @@ app.use((req, res, next) => {
 });
 
 app.use(localsMiddelware);
+app.use("/uploads", express.static("uploads")); // 앞에는 url, 뒤에는 폴더 이름
+app.use("/static", express.static("assets")); // like this! http://localhost:4000/static/js/main.js , assets폴더 안의 파일을 불러옴
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);

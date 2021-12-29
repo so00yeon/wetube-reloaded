@@ -12,7 +12,7 @@ import {
 import {
   protectorMiddleware,
   publicOnlyMiddleware,
-  uploadFiles,
+  avatarUpload,
 } from "../middlewares";
 
 const userRouter = express.Router();
@@ -22,7 +22,7 @@ userRouter
   .route("/edit")
   .all(protectorMiddleware)
   .get(getEdit)
-  .post(uploadFiles.single('avatar'), postEdit); 
+  .post(avatarUpload.single('avatar'), postEdit); 
   // 순서가 꼭 이렇게 와야함, 반대로 올 경우 req.file을 읽을 수가 없음.. 항상 미들웨어의 위치는 굉장히 중요함!
 
 userRouter
@@ -32,6 +32,6 @@ userRouter
   .post(postChangePassword);
 userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
-userRouter.get(":id", see);
+userRouter.get("/:id", see);
 
 export default userRouter;
