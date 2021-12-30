@@ -102,11 +102,19 @@ const handleMouseLeave = () => {
 };
 // 정리 => 마우스가 비디오 안에 들어가면 timeout이 시작되고 마우스를 움직이지 않으면 timeout이 잘 완료됨, 마우스를 움직이면 timeout이 취소되고 새로운 timeout이 시작함.
 
+const handleEnded = () => { // API에 요청보내는 방법
+    const { id } = videoContainer.dataset; // watch.pug에서 보내준 data-id 받는법
+    fetch(`/api/videos/${id}/view`, {
+        method: "post", // apiRouter에서 post로 보냈기 때문에
+    });
+};
+
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumChange);
 video.addEventListener("loadedmetadata" , handleLoadedMetadata);
 video.addEventListener("timeupdate", handleTimeUpdate);
+video.addEventListener("ended", handleEnded)
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
 videoContainer.addEventListener("mousemove", handleMouseMove);

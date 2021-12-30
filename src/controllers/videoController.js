@@ -112,3 +112,15 @@ export const search = async (req, res) => {
   }
   return res.render("search", { pageTitle: "Search", videos });
 };
+
+// 랜더링 없이 api 방식으로 백엔드 처리
+export const registerView = async (req, res) => {
+  const {id} = req.params;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.sendStatus(404); // status()는 render()하기 전에 상태코드를 정할 수 있는 코드이고, sendStatus()는 상태코드를 보내고 연결을 끝냄
+  }
+  video.meta.views = video.meta.views + 1;
+  await video.save();
+  return res.sendStatus(200);
+};
