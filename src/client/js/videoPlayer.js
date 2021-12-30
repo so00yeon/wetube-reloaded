@@ -26,6 +26,12 @@ const handlePlayClick = (e) => {
     playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
 };
 
+const spaceKey = (e) => {
+    if (e.keyCode === 32){
+        handlePlayClick();
+    }
+}; 
+
 const handleMute = (e) => {
     if (video.muted){
         video.muted = false;
@@ -105,3 +111,5 @@ timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
+video.addEventListener("click", handlePlayClick);
+document.addEventListener("keydown", spaceKey);
