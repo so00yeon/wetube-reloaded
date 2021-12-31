@@ -25,6 +25,11 @@ videoRouter
   .route("/upload")
   .all(protectorMiddleware)
   .get(getUpload)
-  .post(videoUpload.single("video"), postUpload);
+  .post(videoUpload.fields([
+    {name: "video"},
+    {name: "thumb"},
+  ]), 
+  postUpload); // 썸네일이랑 동영상 둘 다 올릴 때
+  //.post(videoUpload.single("video"), postUpload); 썸네일 올리기 전 동영상만 올릴 때
 
 export default videoRouter;

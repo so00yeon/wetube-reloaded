@@ -61,13 +61,16 @@ export const postUpload = async (req, res) => {
   const {
     user: { _id },
   } = req.session;
-  const { path: fileUrl } = req.file;
+  const {video, thumb} = req.files;
+  // console.log(video, thumb); 비디오와 썸네일 정보 확인
+  // const { path: fileUrl } = req.file; 동영상 파일 하나 업로드할 때 썼음 두개일때는 아래에 fileUrl, thumbUrl 바로 적음
   const { title, description, hashtags } = req.body;
   try {
     const newVideo = await Video.create({
       title,
       description,
-      fileUrl,
+      fileUrl: video[0].path,
+      thumbUrl: thumb[0].path,
       owner: _id,
       hashtags: Video.formatHashtags(hashtags),
     });

@@ -23,6 +23,11 @@ app.use(
     store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
   })
 );
+app.use((req, res, next) => {
+  res.header("Cross-Origin-Embedder-Policy", "require-corp");
+  res.header("Cross-Origin-Opener-Policy", "same-origin");
+  next();
+});
 app.use(localsMiddleware);
 app.use("/uploads", express.static("uploads")); // 앞에는 url, 뒤에는 폴더 이름
 app.use("/static", express.static("assets")); // like this! http://localhost:4000/static/js/main.js , assets폴더 안의 파일을 불러옴
