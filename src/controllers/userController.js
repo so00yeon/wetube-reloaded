@@ -134,10 +134,13 @@ export const finishGithubLogin = async (req, res) => {
 };
 
 export const logout = (req, res) => {
+  // req.session.loggedIn = false;
+  // req.session.destroy();
+  // req.flash("info", "Bye Bye");
+  // req.session.user = false;
+  req.session.user = null;
+  res.locals.loggedInUser = req.session.user;
   req.session.loggedIn = false;
-  req.session.user = false;
-  req.flash("info", "Bye Bye");
-  //req.session.destroy();
   return res.redirect("/");
 };
 export const getEdit = (req, res) => {
@@ -155,7 +158,7 @@ export const postEdit = async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
-      avatarUrl: file ? (isHeroku ? file.location : file.path ) : avatarUrl,
+      avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
       name,
       email,
       username,
