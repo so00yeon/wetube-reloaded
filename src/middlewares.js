@@ -64,5 +64,3 @@ export const videoUpload = multer({
   },
   storage: isHeroku ? s3VideoUploader : undefined,
 });
-
-const PATH_NAME = window.location.pathname.split( '/' );
