@@ -27,8 +27,10 @@ app.use(
 );
 app.use(flash());
 app.use((req, res, next) => {
-  res.header("Cross-Origin-Embedder-Policy", "require-corp");
+  res.header("Cross-Origin-Embedder-Policy", "credentialless");
   res.header("Cross-Origin-Opener-Policy", "same-origin");
+  res.header("Access-Control-Allow-Origin", "https://wetube-reloaded21.herokuapp.com/");
+  res.header("Access-Control-Allow-Credentials", true);
   next();
 });
 app.use(localsMiddleware);
