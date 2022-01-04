@@ -75,12 +75,13 @@ export const postUpload = async (req, res) => {
   // console.log(video, thumb); 비디오와 썸네일 정보 확인
   // const { path: fileUrl } = req.file; 동영상 파일 하나 업로드할 때 썼음 두개일때는 아래에 fileUrl, thumbUrl 바로 적음
   const { title, description, hashtags } = req.body;
+  const isHeroku = process.env.NODE_ENV === "production";
   try {
     const newVideo = await Video.create({
       title,
       description,
-      fileUrl: video[0].location,
-      thumbUrl: thumb[0].location,
+      fileUrl: isHeroku ? video[0].location : video[0].path,
+      thumbUrl: isHeroku ? thumb[0].location : thumb[0].path,
       owner: _id,
       hashtags: Video.formatHashtags(hashtags),
     });
