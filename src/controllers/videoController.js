@@ -15,6 +15,8 @@ export const watch = async (req, res) => {
   if (!video) {
     return res.render("404", { pageTitle: "Video not found." });
   }
+  console.log(video)
+  console.log(req.session.user)
   return res.render("watch", { pageTitle: video.title, video });
 };
 

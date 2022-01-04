@@ -89,6 +89,7 @@ export const finishGithubLogin = async (req, res) => {
       },
     })
   ).json();
+
   if ("access_token" in tokenRequest) {
     const { access_token } = tokenRequest;
     const apiUrl = "https://api.github.com";
@@ -138,9 +139,13 @@ export const logout = (req, res) => {
   // req.session.destroy();
   // req.flash("info", "Bye Bye");
   // req.session.user = false;
-  req.session.user = null;
-  res.locals.loggedInUser = req.session.user;
-  req.session.loggedIn = false;
+  // req.session.user = null;
+  // res.locals.loggedInUser = req.session.user;
+  // req.session.loggedIn = false;
+  
+  // req.flash("info", "Bye Bye");
+  req.session.destroy();
+  
   return res.redirect("/");
 };
 export const getEdit = (req, res) => {
