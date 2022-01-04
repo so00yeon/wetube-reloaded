@@ -21,6 +21,8 @@ header
                             if loggedInUser.avatarUrl
                                 if loggedInUser.avatarUrl.includes("github")
                                     img.header__avatar(src=loggedInUser.avatarUrl, crossorigin)
+                                else if PATH_NAME[1] === "users"
+                                    img.header__avatar(src=loggedInUser.avatarUrl)
                                 else
                                     img.header__avatar(src='/'+loggedInUser.avatarUrl)
             else
